@@ -1,0 +1,803 @@
+
+//profile-title: AliReza.IrancellⓂ️
+//profile-update-interval: 1
+//subscription-userinfo: upload=0; download=0; total=10737418240000000; expire=2546249531
+//last update on: 2024-06-18 02:49:55
+
+{
+  "log": {
+    "level": "warn",
+    "output": "box.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "udp://1.1.1.1",
+        "address_resolver": "dns-direct"
+      },
+      {
+        "tag": "dns-trick-direct",
+        "address": "https://sky.rethinkdns.com/",
+        "detour": "direct-fragment"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "1.1.1.1",
+        "address_resolver": "dns-local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "alimrv.alimarvani770.workers.dev",
+          "turk.radicalization.ir"
+        ],
+        "server": "dns-direct"
+      },
+      {
+        "domain": "connectivitycheck.gstatic.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
+      },
+      {
+        "domain_suffix": ".ir",
+        "server": "dns-direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "server": "dns-direct"
+      }
+    ],
+    "final": "dns-remote",
+    "static_ips": {
+      "sky.rethinkdns.com": [
+        "104.17.148.22",
+        "104.17.147.22",
+        "188.114.96.3",
+        "188.114.97.3",
+        "2a06:98c1:3121::3",
+        "2a06:98c1:3120::3"
+      ]
+    },
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 9000,
+      "inet4_address": "172.19.0.1/28",
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": true,
+      "stack": "mixed",
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 12334,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 16450
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "alimrv.alimarvani770.workers.dev-HTTP-80 § 0",
+        "alimrv.alimarvani770.workers.dev-HTTP-80-turk.radicalization.ir-EDtunnel § 1",
+        "alimrv.alimarvani770.workers.dev-HTTP-8080 § 2",
+        "alimrv.alimarvani770.workers.dev-HTTP-8080-turk.radicalization.ir-EDtunnel § 3",
+        "alimrv.alimarvani770.workers.dev-HTTP-8880 § 4",
+        "alimrv.alimarvani770.workers.dev-HTTP-8880-turk.radicalization.ir-EDtunnel § 5",
+        "alimrv.alimarvani770.workers.dev-HTTP-2052 § 6",
+        "alimrv.alimarvani770.workers.dev-HTTP-2052-turk.radicalization.ir-EDtunnel § 7",
+        "alimrv.alimarvani770.workers.dev-HTTP-2086 § 8",
+        "alimrv.alimarvani770.workers.dev-HTTP-2086-turk.radicalization.ir-EDtunnel § 9",
+        "alimrv.alimarvani770.workers.dev-HTTP-2095 § 10",
+        "alimrv.alimarvani770.workers.dev-HTTP-2095-turk.radicalization.ir-EDtunnel § 11",
+        "alimrv.alimarvani770.workers.dev-HTTP-2082 § 12",
+        "alimrv.alimarvani770.workers.dev-HTTP-2082-turk.radicalization.ir-EDtunnel § 13",
+        "alimrv.alimarvani770.workers.dev-HTTPS-443 § 14",
+        "alimrv.alimarvani770.workers.dev-HTTPS-443-turk.radicalization.ir-EDtunnel § 15",
+        "alimrv.alimarvani770.workers.dev-HTTPS-8443 § 16",
+        "alimrv.alimarvani770.workers.dev-HTTPS-8443-turk.radicalization.ir-EDtunnel § 17",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2053 § 18",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2053-turk.radicalization.ir-EDtunnel § 19",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2096 § 20",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2096-turk.radicalization.ir-EDtunnel § 21",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2087 § 22",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2087-turk.radicalization.ir-EDtunnel § 23",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2083 § 24",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2083-turk.radicalization.ir-EDtunnel § 25"
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "alimrv.alimarvani770.workers.dev-HTTP-80 § 0",
+        "alimrv.alimarvani770.workers.dev-HTTP-80-turk.radicalization.ir-EDtunnel § 1",
+        "alimrv.alimarvani770.workers.dev-HTTP-8080 § 2",
+        "alimrv.alimarvani770.workers.dev-HTTP-8080-turk.radicalization.ir-EDtunnel § 3",
+        "alimrv.alimarvani770.workers.dev-HTTP-8880 § 4",
+        "alimrv.alimarvani770.workers.dev-HTTP-8880-turk.radicalization.ir-EDtunnel § 5",
+        "alimrv.alimarvani770.workers.dev-HTTP-2052 § 6",
+        "alimrv.alimarvani770.workers.dev-HTTP-2052-turk.radicalization.ir-EDtunnel § 7",
+        "alimrv.alimarvani770.workers.dev-HTTP-2086 § 8",
+        "alimrv.alimarvani770.workers.dev-HTTP-2086-turk.radicalization.ir-EDtunnel § 9",
+        "alimrv.alimarvani770.workers.dev-HTTP-2095 § 10",
+        "alimrv.alimarvani770.workers.dev-HTTP-2095-turk.radicalization.ir-EDtunnel § 11",
+        "alimrv.alimarvani770.workers.dev-HTTP-2082 § 12",
+        "alimrv.alimarvani770.workers.dev-HTTP-2082-turk.radicalization.ir-EDtunnel § 13",
+        "alimrv.alimarvani770.workers.dev-HTTPS-443 § 14",
+        "alimrv.alimarvani770.workers.dev-HTTPS-443-turk.radicalization.ir-EDtunnel § 15",
+        "alimrv.alimarvani770.workers.dev-HTTPS-8443 § 16",
+        "alimrv.alimarvani770.workers.dev-HTTPS-8443-turk.radicalization.ir-EDtunnel § 17",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2053 § 18",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2053-turk.radicalization.ir-EDtunnel § 19",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2096 § 20",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2096-turk.radicalization.ir-EDtunnel § 21",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2087 § 22",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2087-turk.radicalization.ir-EDtunnel § 23",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2083 § 24",
+        "alimrv.alimarvani770.workers.dev-HTTPS-2083-turk.radicalization.ir-EDtunnel § 25"
+      ],
+      "url": "http://connectivitycheck.gstatic.com/generate_204",
+      "interval": "10m0s",
+      "tolerance": 1,
+      "idle_timeout": "30m0s"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-80 § 0",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 80,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-80-turk.radicalization.ir-EDtunnel § 1",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-8080 § 2",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 8080,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-8080-turk.radicalization.ir-EDtunnel § 3",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-8880 § 4",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 8880,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-8880-turk.radicalization.ir-EDtunnel § 5",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2052 § 6",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2052,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2052-turk.radicalization.ir-EDtunnel § 7",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2086 § 8",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2086,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2086-turk.radicalization.ir-EDtunnel § 9",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2095 § 10",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2095,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2095-turk.radicalization.ir-EDtunnel § 11",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2082 § 12",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2082,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTP-2082-turk.radicalization.ir-EDtunnel § 13",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "transport": {
+        "type": "ws",
+        "path": "/re0k0916gfb",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-443 § 14",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-443-turk.radicalization.ir-EDtunnel § 15",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-8443 § 16",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 8443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-8443-turk.radicalization.ir-EDtunnel § 17",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2053 § 18",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2053,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2053-turk.radicalization.ir-EDtunnel § 19",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2096 § 20",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2096,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2096-turk.radicalization.ir-EDtunnel § 21",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2087 § 22",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2087,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2087-turk.radicalization.ir-EDtunnel § 23",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2083 § 24",
+      "server": "alimrv.alimarvani770.workers.dev",
+      "server_port": 2083,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "vless",
+      "tag": "alimrv.alimarvani770.workers.dev-HTTPS-2083-turk.radicalization.ir-EDtunnel § 25",
+      "server": "turk.radicalization.ir",
+      "server_port": 443,
+      "uuid": "2d53ba69-2841-4fc0-90ec-7c6ae9d6ea4a",
+      "tls": {
+        "enabled": true,
+        "server_name": "alimrv.alimarvani770.workers.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "alimrv.alimarvani770.workers.dev"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-fragment",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "2-8"
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "inbound": "dns-in",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "process_name": [
+          "Hiddify",
+          "Hiddify.exe",
+          "HiddifyCli",
+          "HiddifyCli.exe"
+        ],
+        "outbound": "bypass"
+      },
+      {
+        "domain_suffix": ".ir",
+        "outbound": "direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "outbound": "direct"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geoip-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geoip-ir.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geosite-ir.srs",
+        "update_interval": "120h0m0s"
+      }
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "override_android_vpn": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "clash.db"
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:16756",
+      "secret": "k_xihh3NsHZ6Y4rw"
+    }
+  }
+}
